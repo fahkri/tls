@@ -34,7 +34,7 @@ static int	TlsInputProc _ANSI_ARGS_((ClientData instanceData,
 static int	TlsOutputProc _ANSI_ARGS_((ClientData instanceData,
 			CONST char *buf, int toWrite, int *errorCodePtr));
 static int	TlsGetOptionProc _ANSI_ARGS_ ((ClientData instanceData,
-			Tcl_Interp *interp, CONST char *optionName,
+			Tcl_Interp *interp, CONST84 char *optionName,
 			Tcl_DString *dsPtr));
 static void	TlsWatchProc _ANSI_ARGS_((ClientData instanceData, int mask));
 static int	TlsGetHandleProc _ANSI_ARGS_ ((ClientData instanceData,
@@ -507,7 +507,7 @@ TlsOutputProc(ClientData instanceData,	/* Socket state. */
 static int
 TlsGetOptionProc(ClientData instanceData,	/* Socket state. */
 	Tcl_Interp *interp,		/* For errors - can be NULL. */
-	CONST char *optionName,		/* Name of the option to
+	CONST84 char *optionName,	/* Name of the option to
 					 * retrieve the value for, or
 					 * NULL to get all options and
 					 * their values. */

@@ -24,10 +24,15 @@
 #include <errno.h>
 #include <string.h>
 
-#ifdef WIN32
+#ifdef __WIN32__
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <wincrypt.h> /* OpenSSL needs this on Windows */
+#endif
+
+/* Handle tcl8.3->tcl8.4 CONST changes */
+#ifndef CONST84
+#define CONST84
 #endif
 
 #ifdef NO_PATENTS

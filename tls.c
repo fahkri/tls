@@ -454,7 +454,7 @@ CiphersObjCmd(clientData, interp, objc, objv)
     int objc;
     Tcl_Obj	*CONST objv[];
 {
-    static CONST char *protocols[] = {
+    static CONST84 char *protocols[] = {
 	"ssl2",	"ssl3",	"tls1",	NULL
     };
     enum protocol {
@@ -1168,7 +1168,7 @@ MiscObjCmd(clientData, interp, objc, objv)
     int objc;
     Tcl_Obj	*CONST objv[];
 {
-    const char *commands [] = { "req", NULL };
+    CONST84 char *commands [] = { "req", NULL };
     enum command { C_REQ, C_DUMMY };
     int cmd;
 
