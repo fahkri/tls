@@ -22,6 +22,7 @@
 
 #include "tlsInt.h"
 #include "tclOpts.h"
+#include <stdlib.h>
 
 /*
  * External functions
@@ -135,7 +136,6 @@ InfoCallback(SSL *ssl, int where, int ret)
     State *statePtr = (State*)SSL_get_app_data(ssl);
     Tcl_Obj *cmdPtr;
     char *major; char *minor;
-    int w;
 
     if (statePtr->callback == (Tcl_Obj*)NULL)
 	return;
@@ -1139,7 +1139,8 @@ int
 Tls_Init(Tcl_Interp *interp)		/* Interpreter in which the package is
                                          * to be made available. */
 {
-    int major, minor, patchlevel, release;
+    int major, minor, patchlevel, release, i;
+    char rnd_seed[16] = "GrzSlplKqUdnnzP!";	/* 16 bytes */
 
     /*
      * The original 8.2.0 stacked channel implementation (and the patch
@@ -1178,6 +1179,15 @@ Tls_Init(Tcl_Interp *interp)		/* Interpreter in which the package is
     }
     SSL_load_error_strings();
     ERR_load_crypto_strings();
+
+    /*
+     * Seed the random number generator in the SSL library
+     */
+    srand((unsigned int) time((time_t *) NULL));
+    for (i = 0; i < 16; i++) {
+	rnd_seed[i] = 1 + (char) (255.0 * rand()/(RAND_MAX+1.0));
+    }
+    RAND_seed(rnd_seed, sizeof(rnd_seed));
 
     Tcl_CreateObjCommand(interp, "tls::ciphers", CiphersObjCmd,
 	    (ClientData) 0, (Tcl_CmdDeleteProc *) NULL);
