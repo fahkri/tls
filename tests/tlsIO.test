@@ -80,9 +80,9 @@ set tlsServerPort 8048
 set certsDir	[file join [file dirname [info script]] certs]
 set serverCert	[file join $certsDir server.pem]
 set clientCert	[file join $certsDir client.pem]
-set caCert	[file join $certsDir cacert.pem]
-set serverKey	[file join $certsDir skey.pem]
-set clientKey	[file join $certsDir ckey.pem]
+set caCert	[file join $certsDir ca.pem]
+set serverKey	[file join $certsDir server.key]
+set clientKey	[file join $certsDir client.key]
 
 # Some tests require the testthread and exec commands
 
