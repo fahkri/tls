@@ -72,7 +72,7 @@ if {[lsearch [namespace children] ::tcltest] == -1} {
 # The build dir is added as the first element of $PATH
 set auto_path [linsert $auto_path 0 [lindex [split $env(PATH) ";:"] 0]]
 # Load the tls package
-package require tls 1.4
+package require tls 1.5
 
 set tlsServerPort 8048
 
