@@ -654,6 +654,13 @@ ImportObjCmd(clientData, interp, objc, objv)
     proto |= (ssl3 ? TLS_PROTO_SSL3 : 0);
     proto |= (tls1 ? TLS_PROTO_TLS1 : 0);
 
+    /* reset to NULL if blank string provided */
+    if (cert && !*cert) cert = NULL;
+    if (key && !*key) key = NULL;
+    if (ciphers && !*ciphers) ciphers = NULL;
+    if (CAfile && !*CAfile) CAfile = NULL;
+    if (CAdir && !*CAdir) CAdir = NULL;
+
     if (model != NULL) {
 	int mode;
 	/* Get the "model" context */
