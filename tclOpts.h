@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1997-1999 Matt Newman <matt@novadigm.com>
+ *  Copyright (C) 1997-2000 Matt Newman <matt@novadigm.com>
  *
  *  $Header$
  *

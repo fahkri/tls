@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1997-1999 Sensus Consulting Ltd.
+ * Copyright (C) 1997-2000 Sensus Consulting Ltd.
  * Matt Newman <matt@sensus.org>
  *
  * $Header$
