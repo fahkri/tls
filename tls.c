@@ -86,14 +86,26 @@ static DH *get_dh512()
 }
 #endif
 
+
+/*
+ * We lose the tcl password callback when we use the RSA BSAFE SSL-C 1.1.2
+ * libraries instead of the current OpenSSL libraries.
+ */
+
+#ifdef BSAFE
+#define PRE_OPENSSL_0_9_4 1
+#endif
+
 /*
  * Per OpenSSL 0.9.4 Compat
  */
+
 #ifndef STACK_OF
 #define STACK_OF(x)			STACK
 #define sk_SSL_CIPHER_num(sk)		sk_num((sk))
 #define sk_SSL_CIPHER_value( sk, index)	(SSL_CIPHER*)sk_value((sk), (index))
 #endif
+
 
 /*
  *-------------------------------------------------------------------
@@ -852,7 +864,10 @@ CTX_Init(interp, proto, key, cert, CAdir, CAfile, ciphers)
 
     /* set some callbacks */
     SSL_CTX_set_default_passwd_cb(ctx, PasswordCallback);
+
+#ifndef BSAFE
     SSL_CTX_set_default_passwd_cb_userdata(ctx, (void *)interp);
+#endif
 
 #ifndef NO_DH
     {
