@@ -241,10 +241,8 @@ install-doc: doc
 	    # done
 
 test: binaries libraries
-	( echo \
-	  pkg_mkIndex . $(tls_LIB_FILE) \;\
-	  exit; ) | \
-	$(TCLSH_PROG)
+	sed -e "s#\@RELPATH\@#.#" -e "s#\@tls_LIB_FILE\@#$(tls_LIB_FILE)#" \
+	< $(srcdir)/pkgIndex.tcl.in > pkgIndex.tcl
 	TCL_LIBRARY=$(TCL_LIBRARY_DIR) \
 	LD_LIBRARY_PATH=$(BUILD_DIR):$(TCL_BIN_DIR):$(LD_LIBRARY_PATH) \
 	TCLLIBPATH=. \
