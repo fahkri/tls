@@ -728,6 +728,9 @@ ImportObjCmd(clientData, interp, objc, objv)
 			       (TCL_READABLE | TCL_WRITABLE), chan);
 #endif
     if (statePtr->self == (Tcl_Channel) NULL) {
+	/*
+	 * No use of Tcl_EventuallyFree because no possible Tcl_Preserve.
+	 */
 	Tls_Free((char *) statePtr);
         return TCL_ERROR;
     }

@@ -110,13 +110,13 @@ typedef struct State {
  * Forward declarations
  */
 
-EXTERN void		Tls_Clean _ANSI_ARGS_((State *blockPtr));
 EXTERN Tcl_ChannelType *Tls_ChannelType _ANSI_ARGS_((void));
 EXTERN Tcl_Channel	Tls_GetParent _ANSI_ARGS_((State *statePtr));
 
 EXTERN Tcl_Obj*		Tls_NewX509Obj _ANSI_ARGS_ (( Tcl_Interp *interp, X509 *cert));
 EXTERN void		Tls_Error _ANSI_ARGS_ ((State *statePtr, char *msg));
 EXTERN void		Tls_Free _ANSI_ARGS_ ((char *blockPtr));
+EXTERN void		Tls_Clean _ANSI_ARGS_ ((State *statePtr));
 EXTERN int		Tls_WaitForConnect _ANSI_ARGS_(( State *statePtr,
 							int *errorCodePtr));
 
