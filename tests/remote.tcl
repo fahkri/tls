@@ -171,24 +171,15 @@ if {$serverIsSilent == 0} {
     flush stdout
 }
 
+set certsDir	[file join [file dirname [info script]] certs]
+set serverCert	[file join $certsDir server.pem]
+set caCert	[file join $certsDir cacert.pem]
+set serverKey	[file join $certsDir skey.pem]
 if {[catch {set serverSocket \
-    [tls::socket -myaddr $serverAddress -server __accept__ \
-    	-cafile [file join [pwd] certs cacert.pem] \
-    	-certfile [file join [pwd] certs server.pem] \
-    	-keyfile [file join [pwd] certs skey.pem] \
+	[tls::socket -myaddr $serverAddress -server __accept__ \
+	-cafile $caCert -certfile $serverCert -keyfile $serverKey \
 	$serverPort]} msg]} {
     puts "Server on $serverAddress:$serverPort cannot start: $msg"
 } else {
     vwait __server_wait_variable__
 }
-
-
-
-
-
-
-
-
-
-
-
