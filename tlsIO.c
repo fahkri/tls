@@ -487,16 +487,7 @@ dprintf(stderr, "HANDLER(0x%x)\n", mask);
      * The following NotifyChannel calls seems to be important, but
      * we don't know why.  It looks like if the mask is ever non-zero
      * that it will enter an infinite loop.
-     */
-
-    if (mask & TCL_WRITABLE) {
-	fprintf(stderr, "ChannelHandler: mask is writable\n");
-    }
-    if (mask & TCL_READABLE) {
-	fprintf(stderr, "ChannelHandler: mask is readable\n");
-    }
-
-    /*
+     *
      * Notify the upper channel of the current BIO state so the event
      * continues to propagate up the chain.
      *
