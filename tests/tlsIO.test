@@ -666,20 +666,6 @@ test tlsIo-2.12 {tcp connection; no certificates specified} {socket stdio pcCras
     set x
 } {ready done {}}
 
-
-
-
-#################################
-if {[string match sock* $commandSocket] == 1} {
-   puts $commandSocket exit
-   flush $commandSocket
-}
-catch {close $commandSocket}
-catch {close $remoteProcChan}
-::tcltest::cleanupTests
-flush stdout
-return
-#################################
 test tlsIo-3.1 {socket conflict} {socket stdio} {
     removeFile script
     set f [open script w]
@@ -876,6 +862,17 @@ test tlsIo-5.3 {byte order problems, socket numbers, htons} \
     set x
 } {couldn't open socket: not owner}
 
+#################################
+if {[string match sock* $commandSocket] == 1} {
+   puts $commandSocket exit
+   flush $commandSocket
+}
+catch {close $commandSocket}
+catch {close $remoteProcChan}
+::tcltest::cleanupTests
+flush stdout
+return
+#################################
 test tlsIo-6.1 {accept callback error} {socket stdio pcCrash} {
     removeFile script
     set f [open script w]
