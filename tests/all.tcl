@@ -17,8 +17,9 @@ if {[lsearch [namespace children] ::tcltest] == -1} {
 set ::tcltest::testSingleFile false
 set ::tcltest::testsDirectory [file dir [info script]]
 
-# We need to ensure that the testsDirectory is absolute
-::tcltest::normalizePath ::tcltest::testsDirectory
+# We should ensure that the testsDirectory is absolute.
+# This was introduced in Tcl 8.3+'s tcltest, so we need a catch.
+catch {::tcltest::normalizePath ::tcltest::testsDirectory}
 
 puts stdout "Tests running in interp:  [info nameofexecutable]"
 puts stdout "Tests running in working dir:  $::tcltest::testsDirectory"
