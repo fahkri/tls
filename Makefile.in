@@ -355,10 +355,10 @@ dist: dist-clean $(srcdir)/configure
 		$(DIST_DIR)/config
 
 	mkdir $(DIST_DIR)/tests
-	cp -p $(srcdir)/tests/*.tcl $(srcdir)/tests/*.test $(DIST_DIR)/tests
+	cp -p $(srcdir)/tests/*.{tcl,test} $(DIST_DIR)/tests
 
 	mkdir $(DIST_DIR)/tests/certs
-	cp -p $(srcdir)/tests/certs/*.pem $(DIST_DIR)/tests/certs
+	cp -p $(srcdir)/tests/certs/*.{pem,key,req,txt} $(DIST_DIR)/tests/certs
 
 	chmod 664 $(DIST_DIR)/Makefile.in
 	chmod 775 $(DIST_DIR)/configure $(DIST_DIR)/configure.in
