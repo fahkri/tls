@@ -142,6 +142,7 @@ CloseProc(ClientData instanceData,	/* The socket to close. */
 	statePtr->timer = (Tcl_TimerToken)NULL;
     }
 
+    Tls_Clean(statePtr);
     Tcl_EventuallyFree( (ClientData)statePtr, Tls_Free);
     return TCL_OK;
 }
