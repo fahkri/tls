@@ -191,13 +191,20 @@ BioCtrl	(bio, cmd, num, ptr)
 	break;
     case BIO_CTRL_FLUSH:
 	dprintf(stderr, "BIO_CTRL_FLUSH\n");
-	if (Tcl_Flush( chan) == TCL_OK)
-	    ret=1;
-	else
-	    ret=-1;
+	if (
+#ifdef TCL_CHANNEL_VERSION_2
+	    Tcl_WriteRaw(chan, "", 0) >= 0
+#else
+	    Tcl_Flush( chan) == TCL_OK
+#endif
+	    ) {
+	    ret = 1;
+	} else {
+	    ret = -1;
+	}
 	break;
     default:
-	ret=0;
+	ret = 0;
 	break;
     }
     return(ret);
