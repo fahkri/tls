@@ -20,6 +20,6 @@ proc bgerror {err} {
     puts stderr "BG Error: $errorInfo"
 }
 
-source $dir/../library/tls.tcl
+source $dir/../tls.tcl
 set tls::debug 2
 
