@@ -399,7 +399,7 @@ PasswordCallback(char *buf, int size, int verify, void *udata)
     if (statePtr->password == NULL) {
 	if (Tcl_Eval(interp, "tls::password") == TCL_OK) {
 	    char *ret = (char *) Tcl_GetStringResult(interp);
-	    strncpy(buf, ret, size);
+	    strncpy(buf, ret, (size_t) size);
 	    return strlen(ret);
 	} else {
 	    return -1;
@@ -423,7 +423,7 @@ PasswordCallback(char *buf, int size, int verify, void *udata)
 
     if (result == TCL_OK) {
 	char *ret = (char *) Tcl_GetStringResult(interp);
-	strncpy(buf, ret, size);
+	strncpy(buf, ret, (size_t) size);
 	return strlen(ret);
     } else {
 	return -1;
@@ -501,6 +501,8 @@ CiphersObjCmd(clientData, interp, objc, objv)
 #else
 		ctx = SSL_CTX_new(TLSv1_method()); break;
 #endif
+    default:
+		break;
     }
     if (ctx == NULL) {
 	Tcl_AppendResult(interp, REASON(), (char *) NULL);
@@ -1301,6 +1303,8 @@ MiscObjCmd(clientData, interp, objc, objv)
 		return TCL_ERROR;
 	    }
 	}
+	break;
+    default:
 	break;
     }
     return TCL_OK;

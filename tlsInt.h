@@ -66,7 +66,7 @@
 #endif
 
 #define SSL_ERROR(ssl,err)	\
-	    ((char*)ERR_reason_error_string(SSL_get_error((ssl),(err))))
+    ((char*)ERR_reason_error_string((unsigned long)SSL_get_error((ssl),(err))))
 /*
  * OpenSSL BIO Routines
  */

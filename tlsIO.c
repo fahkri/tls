@@ -122,7 +122,7 @@ Tcl_ChannelType *Tls_ChannelType()
 	 *     against an older variant.
 	 */
 
-	int size = sizeof(Tcl_ChannelType); /* Base size */
+	unsigned int size = sizeof(Tcl_ChannelType); /* Base size */
 
 	/*
 	 * Size of a procedure pointer. We assume that all procedure

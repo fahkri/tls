@@ -129,7 +129,7 @@ BioPuts	(bio, str)
     BIO *bio;
     CONST char *str;
 {
-    return BioWrite(bio, str, strlen(str));
+    return BioWrite(bio, str, (int) strlen(str));
 }
 
 static long
