@@ -1181,13 +1181,22 @@ Tls_Init(Tcl_Interp *interp)		/* Interpreter in which the package is
     ERR_load_crypto_strings();
 
     /*
-     * Seed the random number generator in the SSL library
+     * Seed the random number generator in the SSL library,
+     * using the do/while construct because of the bug note in the
+     * OpenSSL FAQ at http://www.openssl.org/support/faq.html#USER1
+     *
+     * The crux of the problem is that Solaris 7 does not have a 
+     * /dev/random or /dev/urandom device so it cannot gather enough
+     * entropy from the RAND_seed() when TLS initializes and refuses
+     * to go further. Earlier versions of OpenSSL carried on regardless.
      */
     srand((unsigned int) time((time_t *) NULL));
-    for (i = 0; i < 16; i++) {
-	rnd_seed[i] = 1 + (char) (255.0 * rand()/(RAND_MAX+1.0));
-    }
-    RAND_seed(rnd_seed, sizeof(rnd_seed));
+    do {
+	for (i = 0; i < 16; i++) {
+	    rnd_seed[i] = 1 + (char) (255.0 * rand()/(RAND_MAX+1.0));
+	}
+	RAND_seed(rnd_seed, sizeof(rnd_seed));
+    } while (RAND_status() != 1);
 
     Tcl_CreateObjCommand(interp, "tls::ciphers", CiphersObjCmd,
 	    (ClientData) 0, (Tcl_CmdDeleteProc *) NULL);
