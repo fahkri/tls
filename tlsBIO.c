@@ -63,7 +63,11 @@ BioWrite (bio, buf, bufLen)
 
     dprintf(stderr,"\nBioWrite(0x%x, <buf>, %d) [0x%x]", bio, bufLen, chan);
 
+#ifdef TCL_CHANNEL_VERSION_2
+    ret = Tcl_WriteRaw( chan, buf, bufLen);
+#else
     ret = Tcl_Write( chan, buf, bufLen);
+#endif
 
     dprintf(stderr,"\n[0x%x] BioWrite(%d) -> %d [%d.%d]", chan, bufLen, ret,
 		Tcl_Eof( chan), Tcl_GetErrno());
@@ -94,7 +98,11 @@ BioRead (bio, buf, bufLen)
 
     if (buf == NULL) return 0;
 
+#ifdef TCL_CHANNEL_VERSION_2
+    ret = Tcl_ReadRaw( chan, buf, bufLen);
+#else
     ret = Tcl_Read( chan, buf, bufLen);
+#endif
 
     dprintf(stderr,"\n[0x%x] BioRead(%d) -> %d [%d.%d]", chan, bufLen, ret,
 	Tcl_Eof(chan), Tcl_GetErrno());

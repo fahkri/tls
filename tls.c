@@ -540,6 +540,12 @@ HandshakeObjCmd(clientData, interp, objc, objv)
     if (chan == (Tcl_Channel) NULL) {
         return TCL_ERROR;
     }
+#ifdef TCL_CHANNEL_VERSION_2
+    /*
+     * Make sure to operate on the topmost channel
+     */
+    chan = Tcl_GetTopChannel(chan);
+#endif
     if (Tcl_GetChannelType(chan) != Tls_ChannelType()) {
         Tcl_AppendResult(interp, "bad channel \"", Tcl_GetChannelName(chan),
                 "\": not a TLS channel", NULL);
@@ -632,6 +638,12 @@ ImportObjCmd(clientData, interp, objc, objv)
     if (chan == (Tcl_Channel) NULL) {
         return TCL_ERROR;
     }
+#ifdef TCL_CHANNEL_VERSION_2
+    /*
+     * Make sure to operate on the topmost channel
+     */
+    chan = Tcl_GetTopChannel(chan);
+#endif
 
     for (idx = 2; idx < objc; idx++) {
 	char *opt = Tcl_GetStringFromObj(objv[idx], NULL);
@@ -680,6 +692,12 @@ ImportObjCmd(clientData, interp, objc, objv)
 	if (chan == (Tcl_Channel)0) {
 	    return TCL_ERROR;
 	}
+#ifdef TCL_CHANNEL_VERSION_2
+	/*
+	 * Make sure to operate on the topmost channel
+	 */
+	chan = Tcl_GetTopChannel(chan);
+#endif
 	if (Tcl_GetChannelType(chan) != Tls_ChannelType()) {
 	    Tcl_AppendResult(interp, "bad channel \"", Tcl_GetChannelName(chan),
 		    "\": not a TLS channel", NULL);
@@ -723,9 +741,14 @@ ImportObjCmd(clientData, interp, objc, objv)
 				Tls_ChannelType(), (ClientData) statePtr,
 			       (TCL_READABLE | TCL_WRITABLE), statePtr->parent);
 #else
+#ifdef TCL_CHANNEL_VERSION_2
+    statePtr->self = Tcl_StackChannel(interp, Tls_ChannelType(),
+	    (ClientData) statePtr, (TCL_READABLE | TCL_WRITABLE), chan);
+#else
     statePtr->self = chan;
     Tcl_StackChannel( interp, Tls_ChannelType(), (ClientData) statePtr,
-			       (TCL_READABLE | TCL_WRITABLE), chan);
+	    (TCL_READABLE | TCL_WRITABLE), chan);
+#endif
 #endif
     if (statePtr->self == (Tcl_Channel) NULL) {
 	/*
@@ -990,6 +1013,12 @@ StatusObjCmd(clientData, interp, objc, objv)
     if (chan == (Tcl_Channel)0) {
 	return TCL_ERROR;
     }
+#ifdef TCL_CHANNEL_VERSION_2
+    /*
+     * Make sure to operate on the topmost channel
+     */
+    chan = Tcl_GetTopChannel(chan);
+#endif
     if (Tcl_GetChannelType(chan) != Tls_ChannelType()) {
         Tcl_AppendResult(interp, "bad channel \"", Tcl_GetChannelName(chan),
                 "\": not a TLS channel", NULL);
