@@ -174,7 +174,7 @@ if {$serverIsSilent == 0} {
 set certsDir	[file join [file dirname [info script]] certs]
 set serverCert	[file join $certsDir server.pem]
 set caCert	[file join $certsDir cacert.pem]
-set serverKey	[file join $certsDir skey.pem]
+set serverKey	[file join $certsDir server.key]
 if {[catch {set serverSocket \
 	[tls::socket -myaddr $serverAddress -server __accept__ \
 	-cafile $caCert -certfile $serverCert -keyfile $serverKey \
