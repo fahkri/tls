@@ -1,5 +1,5 @@
 Copyright (C) 1997-2000 Matt Newman <matt@novadigm.com>
-TLS 1.4 Copyright (C) 2000 Ajuba Solutions
+TLS 1.4.1 Copyright (C) 2000 Ajuba Solutions
 
 $Header$
 
@@ -15,7 +15,8 @@ limitations in the earlier implementation.  TLS 1.4 should compile with
 any stubs-capable Tcl interpreter, but will require 8.2+ when loaded.
 There are known limitations in the 8.2.0-8.3.1 stacked channel
 implementation, so it is encouraged that people use TLS 1.4+ with an
-8.3.2+ Tcl interpreter.
+8.3.2+ Tcl interpreter.  These modifications are by Jeff Hobbs
+<jeff@hobbs.org>.
 
 Full filevent sematics should also be intact - see tests directory for
 blocking and non-blocking examples.
