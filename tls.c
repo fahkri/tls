@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 1997-1999 Matt Newman <matt@novadigm.com>
+ * Copyright (C) 2000 Ajuba Solutions
  *
  * $Header$
  *
