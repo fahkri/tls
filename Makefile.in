@@ -27,6 +27,8 @@ tls_SOURCES =	tls.c tlsIO.c tlsBIO.c \
 		tlsX509.c fixstrtod.c strncasecmp.c
 SOURCES	=	$(tls_SOURCES)
 
+tls_SCRIPT_FILES = tls.tcl
+
 #========================================================================
 # Enumerate the names of the object files included in this package.
 # These objects are created and linked into the final library.
@@ -201,7 +203,7 @@ all: binaries libraries doc
 
 binaries: $(BINARIES)
 
-libraries:
+libraries: $(tls_SCRIPT_FILES)
 
 doc:
 
@@ -299,6 +301,9 @@ fixstrtod.$(OBJEXT): $(srcdir)/fixstrtod.c
 
 strncasecmp.$(OBJEXT): $(srcdir)/strncasecmp.c
 	$(COMPILE) -c `@CYGPATH@ $(srcdir)/strncasecmp.c` -o $@
+
+tls.tcl: $(srcdir)/tls.tcl
+	cp $(srcdir)/tls.tcl tls.tcl
 
 #========================================================================
 # End of user-definable section
