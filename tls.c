@@ -1141,10 +1141,17 @@ Tls_Init(Tcl_Interp *interp)		/* Interpreter in which the package is
                                          * to be made available. */
 {
 #if TCL_MAJOR_VERSION >= 8 && TCL_MINOR_VERSION >= 2
-    if (!Tcl_InitStubs(interp, TCL_VERSION, 0)) {
+    /*
+     * The original 8.2.0 stacked channel implementation (and the patch
+     * that preceded it) had problems with scalability and robustness.
+     * These were address in 8.3.2 / 8.4a2, so we now require that as a
+     * minimum for TLS 1.4+.
+     */
+    if (Tcl_InitStubs(interp, "8.3.2", 0) == NULL) {
         return TCL_ERROR;
     }
 #endif
+
     if (SSL_library_init() != 1) {
         Tcl_AppendResult(interp, "could not initialize SSL library", NULL);
 	return TCL_ERROR;
