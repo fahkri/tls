@@ -6,6 +6,7 @@
 
 # $Id$
 
+
 errstatus=0
 
 for file
