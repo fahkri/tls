@@ -300,9 +300,6 @@ fixstrtod.$(OBJEXT): $(srcdir)/fixstrtod.c
 strncasecmp.$(OBJEXT): $(srcdir)/strncasecmp.c
 	$(COMPILE) -c `@CYGPATH@ $(srcdir)/strncasecmp.c` -o $@
 
-tls.tcl: $(srcdir)/tls.tcl
-	cp $(srcdir)/tls.tcl tls.tcl
-
 #========================================================================
 # End of user-definable section
 #========================================================================

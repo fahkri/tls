@@ -846,7 +846,7 @@ ImportObjCmd(clientData, interp, objc, objv)
 
     SSL_set_verify(statePtr->ssl, verify, VerifyCallback);
 
-    SSL_CTX_set_info_callback(statePtr->ctx, InfoCallback);
+    SSL_CTX_set_info_callback(statePtr->ctx, (void (*)())InfoCallback);
 
     /* Create Tcl_Channel BIO Handler */
     statePtr->p_bio	= BIO_new_tcl(statePtr, BIO_CLOSE);
@@ -1182,7 +1182,7 @@ MiscObjCmd(clientData, interp, objc, objv)
 	    Tcl_Obj **listv;
 	    int listc,i;
 
-	    BIO *in=NULL,*out=NULL;
+	    BIO *out=NULL;
 
 	    char *k_C="",*k_ST="",*k_L="",*k_O="",*k_OU="",*k_CN="",*k_Email="";
 	    char *keyout,*pemout,*str;

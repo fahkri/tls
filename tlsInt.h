@@ -22,6 +22,7 @@
 
 #include "tls.h"
 #include <errno.h>
+#include <string.h>
 
 #ifdef NO_PATENTS
 #define NO_IDEA
@@ -35,9 +36,11 @@
 #ifdef BSAFE
 #include <ssl.h>
 #include <err.h>
+#include <rand.h>
 #else
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+#include <openssl/rand.h>
 #endif
 
 #ifdef TCL_STORAGE_CLASS
