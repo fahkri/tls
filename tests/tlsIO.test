@@ -71,7 +71,7 @@ if {[lsearch [namespace children] ::tcltest] == -1} {
 
 # Load the tls package
 
-package require tls
+package require tls 1.4
 
 set tlsServerPort 8048
 
