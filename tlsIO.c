@@ -285,7 +285,7 @@ TlsCloseProc(ClientData instanceData,	/* The socket to close. */
 {
     State *statePtr = (State *) instanceData;
 
-    dprintf(stderr,"\nTlsCloseProc(0x%x)", statePtr);
+    dprintf(stderr,"\nTlsCloseProc(0x%x)", (unsigned int) statePtr);
 
     if (channelTypeVersion == TLS_CHANNEL_VERSION_1) {
 	/*
@@ -411,7 +411,7 @@ TlsOutputProc(ClientData instanceData,	/* Socket state. */
 
     *errorCodePtr = 0;
 
-    dprintf(stderr,"\nBIO_write(0x%x, %d)", statePtr, toWrite);
+    dprintf(stderr,"\nBIO_write(0x%x, %d)", (unsigned int) statePtr, toWrite);
 
     if (!SSL_is_init_finished(statePtr->ssl)) {
 	written = Tls_WaitForConnect(statePtr, errorCodePtr);
@@ -442,7 +442,7 @@ TlsOutputProc(ClientData instanceData,	/* Socket state. */
 	ERR_clear_error();
 	written = BIO_write(statePtr->bio, buf, toWrite);
 	dprintf(stderr,"\nBIO_write(0x%x, %d) -> [%d]",
-		statePtr, toWrite, written);
+		(unsigned int) statePtr, toWrite, written);
     }
     if (written <= 0) {
 	switch ((err = SSL_get_error(statePtr->ssl, written))) {
@@ -849,7 +849,7 @@ Tls_WaitForConnect( statePtr, errorCodePtr)
 {
     int err;
 
-    dprintf(stderr,"\nWaitForConnect(0x%x)", statePtr);
+    dprintf(stderr,"\nWaitForConnect(0x%x)", (unsigned int) statePtr);
 
     for (;;) {
 	/* Not initialized yet! */
