@@ -24,6 +24,12 @@
 #include <errno.h>
 #include <string.h>
 
+#ifdef WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <wincrypt.h> /* OpenSSL needs this on Windows */
+#endif
+
 #ifdef NO_PATENTS
 #define NO_IDEA
 #define NO_RC2

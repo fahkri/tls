@@ -6,6 +6,17 @@
  */
 #include "tlsInt.h"
 
+/*
+ *  Ensure these are not macros - known to be defined on Win32 
+ */
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
+
 static int min(int a, int b)
 {
     return (a < b) ? a : b;
