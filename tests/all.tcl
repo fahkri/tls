@@ -14,11 +14,11 @@ if {[lsearch [namespace children] ::tcltest] == -1} {
     namespace import ::tcltest::*
 }
 
-#  set ::tcltest::testSingleFile false
-#  set ::tcltest::testsDirectory [file dir [info script]]
+set ::tcltest::testSingleFile false
+set ::tcltest::testsDirectory [file dir [info script]]
 
 # We need to ensure that the testsDirectory is absolute
-#  ::tcltest::normalizePath ::tcltest::testsDirectory
+::tcltest::normalizePath ::tcltest::testsDirectory
 
 puts stdout "Tests running in interp:  [info nameofexecutable]"
 puts stdout "Tests running in working dir:  $::tcltest::testsDirectory"
