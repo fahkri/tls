@@ -124,7 +124,7 @@ if {![info exists serverPort]} {
     }
 }
 if {![info exists serverPort]} {
-    set serverPort 2048
+    set serverPort 8048
 }
 
 if {![info exists serverAddress]} {
