@@ -1477,7 +1477,7 @@ Tls_Init(Tcl_Interp *interp)		/* Interpreter in which the package is
     Tcl_CreateObjCommand(interp, "tls::misc", MiscObjCmd,
 	    (ClientData) 0, (Tcl_CmdDeleteProc *) NULL);
 
-    return Tcl_PkgProvide(interp, PACKAGE, VERSION);
+    return Tcl_PkgProvide(interp, PACKAGE_NAME, PACKAGE_VERSION);
 }
 
 /*
