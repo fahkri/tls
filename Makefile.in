@@ -242,7 +242,7 @@ install-doc: doc
 
 test: binaries libraries
 	( echo \
-	  pkg_mkIndex . $(exampleA_LIB_FILE) \;\
+	  pkg_mkIndex . $(tls_LIB_FILE) \;\
 	  exit; ) | \
 	$(TCLSH_PROG)
 	TCL_LIBRARY=$(TCL_LIBRARY_DIR) \
