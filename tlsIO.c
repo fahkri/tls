@@ -149,12 +149,13 @@ Tcl_ChannelType *Tls_ChannelType()
 	 * close2Proc, seekProc, setOptionProc stay NULL.
 	 */
 
-	tlsChannelType->closeProc        = TlsCloseProc;
-	tlsChannelType->inputProc        = TlsInputProc;
-	tlsChannelType->outputProc       = TlsOutputProc;
-	tlsChannelType->getOptionProc    = TlsGetOptionProc;
-	tlsChannelType->watchProc        = TlsWatchProc;
-	tlsChannelType->getHandleProc    = TlsGetHandleProc;
+	tlsChannelType->typeName	= "tls";
+	tlsChannelType->closeProc	= TlsCloseProc;
+	tlsChannelType->inputProc	= TlsInputProc;
+	tlsChannelType->outputProc	= TlsOutputProc;
+	tlsChannelType->getOptionProc	= TlsGetOptionProc;
+	tlsChannelType->watchProc	= TlsWatchProc;
+	tlsChannelType->getHandleProc	= TlsGetHandleProc;
 
 	/*
 	 * blockModeProc is a twister.  We have to make some runtime-choices,
