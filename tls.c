@@ -3,7 +3,7 @@
  * some modifications:
  *	Copyright (C) 2000 Ajuba Solutions
  *	Copyright (C) 2002 ActiveState Corporation
- *	Copyright (C) 2003 Starfish Systems
+ *	Copyright (C) 2003 Starfish Systems 
  *
  * $Header$
  *
