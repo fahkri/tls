@@ -34,8 +34,10 @@
 
 #ifdef BSAFE
 #include <ssl.h>
+#include <err.h>
 #else
 #include <openssl/ssl.h>
+#include <openssl/err.h>
 #endif
 
 #ifdef TCL_STORAGE_CLASS
