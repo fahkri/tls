@@ -62,7 +62,7 @@ SSL_LIB_DIR =		@SSL_LIB_DIR@
 SSL_INCLUDE_DIR =	@SSL_INCLUDE_DIR@
 SSL_INCLUDE_DIR_NATIVE = @SSL_INCLUDE_DIR_NATIVE@
 SSL_INCLUDES =		-I$(SSL_INCLUDE_DIR_NATIVE)
-SSL_CFLAGS =		-DNO_PATENTS
+SSL_CFLAGS =		@SSL_CFLAGS@
 
 
 #========================================================================
