@@ -1859,7 +1859,7 @@ test tlsIO-12.2 {testing inheritance of client sockets} \
 } {client socket was not inherited}
 
 test tlsIO-12.3 {testing inheritance of accepted sockets} \
-	{socket doTestsWithRemoteServer} {
+	{hangsOnLinux socket doTestsWithRemoteServer} {
     # hangs on Linux
     removeFile script1
     removeFile script2
