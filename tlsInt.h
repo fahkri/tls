@@ -32,7 +32,11 @@
 #define NO_SSL2
 #endif
 
+#ifdef BSAFE
+#include <ssl.h>
+#else
 #include <openssl/ssl.h>
+#endif
 
 #ifdef TCL_STORAGE_CLASS
 # undef TCL_STORAGE_CLASS
