@@ -21,7 +21,11 @@ implementation, so it is encouraged that people use TLS 1.4+ with an
 Full filevent sematics should also be intact - see tests directory for
 blocking and non-blocking examples.
 
-This was built (almost) from scratch based upon observation of OpenSSL 0.9.2B
+This was built (almost) from scratch based upon observation of OpenSSL 0.9.2b.
+For correct functioning, use OpenSSL 0.9.6g or later.  This release contains
+important fixes to memory management, as well as incorporating the verify
+callback correction which appeared in OpenSSL 0.9.6c.  For best security, use
+the latest official release of OpenSSL.
 
 Addition credit is due for Andreas Kupries (a.kupries@westend.com), for
 providing the Tcl_ReplaceChannel mechanism and working closely with me
