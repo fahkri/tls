@@ -13,6 +13,12 @@ namespace eval tls {
     # Maps UID to Server Socket
     variable srvmap
     variable srvuid 0
+
+    # Over-ride this if you are using a different socket command
+    variable socketCmd
+    if {![info exists socketCmd]} {
+        set socketCmd [info command ::socket]
+    }
 }
 #
 # Backwards compatibility, also used to set the default
@@ -27,6 +33,7 @@ proc tls::init {args} {
 # Helper function - behaves exactly as the native socket command.
 #
 proc tls::socket {args} {
+    variable socketCmd
     set idx [lsearch $args -server]
     if {$idx != -1} {
 	set server 1
@@ -89,7 +96,7 @@ proc tls::socket {args} {
     #
     # Create TCP/IP socket
     #
-    set chan [eval ::socket $sopts]
+    set chan [eval $socketCmd $sopts]
     if {!$server && [catch {
 	#
 	# Push SSL layer onto socket
