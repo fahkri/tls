@@ -110,6 +110,7 @@ typedef struct State {
  * Forward declarations
  */
 
+EXTERN void		Tls_Clean _ANSI_ARGS_((State *blockPtr));
 EXTERN Tcl_ChannelType *Tls_ChannelType _ANSI_ARGS_((void));
 EXTERN Tcl_Channel	Tls_GetParent _ANSI_ARGS_((State *statePtr));
 
