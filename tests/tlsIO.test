@@ -94,7 +94,7 @@ if {![info exists remoteServerIP]} {
     }
 }
 if {![info exists remoteServerPort]} {
-    if {[info exists env(remoteServerIP)]} {
+    if {[info exists env(remoteServerPort)]} {
 	set remoteServerPort $env(remoteServerPort)
     } else {
         if {[info exists remoteServerIP]} {
