@@ -96,6 +96,7 @@ proc __accept__ {s a p} {
     if {$VERBOSE} {
 	puts "Server accepts new connection from $a:$p on $s"
     }
+    tls::handshake $s
     fileevent $s readable [list __readAndExecute__ $s]
     fconfigure $s -buffering line -translation crlf
 }
