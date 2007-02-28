@@ -34,6 +34,7 @@ proc tls::init {args} {
 #
 proc tls::socket {args} {
     variable socketCmd
+    variable defaults
     set idx [lsearch $args -server]
     if {$idx != -1} {
 	set server 1
@@ -50,7 +51,7 @@ proc tls::socket {args} {
     }
     set argc [llength $args]
     set sopts {}
-    set iopts [concat [list -server $server] ${tls::defaults}]	;# Import options
+    set iopts [concat [list -server $server] $defaults]	;# Import options
 
     for {set idx 0} {$idx < $argc} {incr idx} {
 	set arg [lindex $args $idx]

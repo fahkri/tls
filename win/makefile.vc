@@ -302,7 +302,7 @@ lflags	= $(lflags) -ws:aggressive
 dlllflags = $(lflags) -dll
 conlflags = $(lflags) -subsystem:console
 guilflags = $(lflags) -subsystem:windows
-baselibs  = $(TCLSTUBLIB) $(SSL_LIBS) ws2_32.lib gdi32.lib
+baselibs  = $(TCLSTUBLIB) $(SSL_LIBS) ws2_32.lib user32.lib gdi32.lib advapi32.lib
 
 #---------------------------------------------------------------------
 # TclTest flags
@@ -351,8 +351,9 @@ setup:
 	@if not exist $(OUT_DIR)\nul mkdir $(OUT_DIR)
 	@if not exist $(TMP_DIR)\nul mkdir $(TMP_DIR)
 
+# See <tcl>/win/coffbase.txt for extension base addresses.
 $(PRJLIB): $(DLLOBJS)
-	$(link32) $(dlllflags) -out:$@ $(baselibs) @<<
+	$(link32) $(dlllflags) -base:0x10780000 -out:$@ $(baselibs) @<<
 $**
 <<
 	-@del $*.exp
