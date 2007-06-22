@@ -20,7 +20,7 @@ dnl Their home page on the web is "www.rsasecurity.com".
 
 AC_INIT([tls], [1.5.1])
 
-TEA_INIT([3.5])
+TEA_INIT([3.6])
 
 AC_CONFIG_AUX_DIR(tclconfig)
 
