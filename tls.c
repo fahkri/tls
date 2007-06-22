@@ -288,6 +288,8 @@ VerifyCallback(int ok, X509_STORE_CTX *ctx)
     Tcl_Preserve( (ClientData) statePtr->interp);
     Tcl_Preserve( (ClientData) statePtr);
 
+    statePtr->flags |= TLS_TCL_CALLBACK;
+
     Tcl_IncrRefCount( cmdPtr);
     if (Tcl_GlobalEvalObj(statePtr->interp, cmdPtr) != TCL_OK) {
 	/* It got an error - reject the certificate.		*/
@@ -305,6 +307,8 @@ VerifyCallback(int ok, X509_STORE_CTX *ctx)
 	}
     }
     Tcl_DecrRefCount( cmdPtr);
+
+    statePtr->flags &= ~(TLS_TCL_CALLBACK);
 
     Tcl_Release( (ClientData) statePtr);
     Tcl_Release( (ClientData) statePtr->interp);
@@ -739,23 +743,11 @@ ImportObjCmd(clientData, interp, objc, objv)
 
     /* new SSL state */
     statePtr		= (State *) ckalloc((unsigned) sizeof(State));
-    statePtr->self	= (Tcl_Channel)NULL;
-    statePtr->timer	= (Tcl_TimerToken)NULL;
+    memset(statePtr, 0, sizeof(State));
 
     statePtr->flags	= flags;
-    statePtr->watchMask	= 0;
-    statePtr->mode	= 0;
-
     statePtr->interp	= interp;
-    statePtr->callback	= (Tcl_Obj *)0;
-    statePtr->password	= (Tcl_Obj *)0;
-
     statePtr->vflags	= verify;
-    statePtr->ssl	= (SSL*)0;
-    statePtr->ctx	= (SSL_CTX*)0;
-    statePtr->bio	= (BIO*)0;
-    statePtr->p_bio	= (BIO*)0;
-
     statePtr->err	= "";
 
     /* allocate script */
