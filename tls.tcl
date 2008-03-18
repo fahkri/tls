@@ -20,6 +20,22 @@ namespace eval tls {
         set socketCmd [info command ::socket]
     }
 }
+
+proc tls::initlib {dir dll} {
+    # Package index cd's into the package directory for loading.
+    # Irrelevant to unixoids, but for Windows this enables the OS to find
+    # the dependent DLL's in the CWD, where they may be.
+    set cwd [pwd]
+    catch {cd $dir}
+    set res [catch {load [file join $dir $dll]} err]
+    catch {cd $cwd}
+    if {$res} {
+	namespace delete tls
+	return -code $res $err
+    }
+    rename tls::initlib {}
+}
+
 #
 # Backwards compatibility, also used to set the default
 # context options
