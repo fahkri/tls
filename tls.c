@@ -608,6 +608,9 @@ HandshakeObjCmd(clientData, interp, objc, objv)
     if (!SSL_is_init_finished(statePtr->ssl)) {
 	int err;
 	ret = Tls_WaitForConnect(statePtr, &err);
+	if ((statePtr->flags & TLS_TCL_ASYNC) && err == EAGAIN) {
+	    ret = 0;
+	}
 	if (ret < 0) {
 	    CONST char *errStr = statePtr->err;
 	    Tcl_ResetResult(interp);

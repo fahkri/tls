@@ -27,10 +27,10 @@ proc tls::initlib {dir dll} {
     # the dependent DLL's in the CWD, where they may be.
     set cwd [pwd]
     catch {cd $dir}
-    set res [catch {load [file join $dir $dll]} err]
+    set res [catch {uplevel #0 [list load [file join [pwd] $dll]]} err]
     catch {cd $cwd}
     if {$res} {
-	namespace delete tls
+	namespace eval [namespace parent] {namespace delete tls}
 	return -code $res $err
     }
     rename tls::initlib {}
