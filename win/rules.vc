@@ -597,6 +597,16 @@ TK_LIBRARY	= $(_TKDIR)\library
 !endif
 !endif
 
+
+#----------------------------------------------------------
+# Setup the fully qualified OUT_DIR path as OUT_DIR_PATH
+#----------------------------------------------------------
+!if [echo OUT_DIR_PATH = \>> version.vc] \
+    && [nmakehlp -Q "$(OUT_DIR)" >> version.vc]
+!endif
+!include version.vc
+
+
 #----------------------------------------------------------
 # Display stats being used.
 #----------------------------------------------------------
