@@ -87,6 +87,7 @@ proc tls::socket {args} {
 	switch -glob -- $server,$arg {
 	    0,-async	{lappend sopts $arg}
 	    0,-myport	-
+	    *,-type	-
 	    *,-myaddr	{lappend sopts $arg [lindex $args [incr idx]]}
 	    *,-cadir	-
 	    *,-cafile	-
