@@ -205,7 +205,7 @@ test: binaries libraries
 	      file copy [file join $(srcdir) tls.tcl] tls.tcl \
 	  } ;\
 	  source [file join $(srcdir) tls.tcl]; \
-	  set argv $(TESTFLAGS); \
+	  set argv {$(TESTFLAGS)}; \
 	  source [file join $(srcdir) tests all.tcl]" | $(TCLSH)
 
 shell: binaries libraries
