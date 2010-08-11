@@ -1149,13 +1149,15 @@ StatusObjCmd(clientData, interp, objc, objv)
 		"\": not a TLS channel", NULL);
 	return TCL_ERROR;
     }
-    statePtr	= (State *) Tcl_GetChannelInstanceData(chan);
-    if (objc == 2)
-	peer	= SSL_get_peer_certificate(statePtr->ssl);
-    else
-	peer	= SSL_get_certificate(statePtr->ssl);
+    statePtr = (State *) Tcl_GetChannelInstanceData(chan);
+    if (objc == 2) {
+	peer = SSL_get_peer_certificate(statePtr->ssl);
+    } else {
+	peer = SSL_get_certificate(statePtr->ssl);
+    }
     if (peer) {
 	objPtr = Tls_NewX509Obj(interp, peer);
+	if (objc == 2) { X509_free(peer); }
     } else {
 	objPtr = Tcl_NewListObj(0, NULL);
     }
