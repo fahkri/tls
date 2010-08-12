@@ -332,7 +332,7 @@ dist: dist-clean
 # Additionally, the .dll files go into the bin directory, but the .lib
 # files go into the lib directory.  On Unix platforms, all library files
 # go into the lib directory.  In addition, this will generate the pkgIndex.tcl
-# file in the install location (assuming it can find a usable tclsh8.2 shell)
+# file in the install location (assuming it can find a usable tclsh)
 #
 # You should not have to modify this target.
 #========================================================================
