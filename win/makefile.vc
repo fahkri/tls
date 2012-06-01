@@ -164,7 +164,7 @@ PROJECT = tls
 #PROJECT_REQUIRES_TK=1
 !include "rules.vc"
 
-DOTVERSION      = 1.6.1
+DOTVERSION      = 1.6.2
 VERSION         = $(DOTVERSION:.=)
 STUBPREFIX      = $(PROJECT)stub
 
