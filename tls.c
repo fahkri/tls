@@ -1265,7 +1265,7 @@ MiscObjCmd(clientData, interp, objc, objv)
     int objc;
     Tcl_Obj	*CONST objv[];
 {
-    CONST84 char *commands [] = { "req", NULL };
+    static CONST84 char *commands [] = { "req", NULL };
     enum command { C_REQ, C_DUMMY };
     int cmd;
 

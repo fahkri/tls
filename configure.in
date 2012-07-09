@@ -18,7 +18,7 @@ dnl Their home page on the web is "www.rsasecurity.com".
 # macro used to verify that the configure script can find the sources
 #--------------------------------------------------------------------
 
-AC_INIT([tls], [1.6.2])
+AC_INIT([tls], [1.6.3])
 
 TEA_INIT([3.8])
 
