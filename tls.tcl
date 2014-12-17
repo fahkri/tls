@@ -21,34 +21,6 @@ namespace eval tls {
     }
 }
 
-proc tls::initlib {dir dll} {
-    # Package index cd's into the package directory for loading.
-    # Irrelevant to unixoids, but for Windows this enables the OS to find
-    # the dependent DLL's in the CWD, where they may be.
-    set cwd [pwd]
-    catch {cd $dir}
-    if {[string equal $::tcl_platform(platform) "windows"] &&
-	![string equal [lindex [file system $dir] 0] "native"]} {
-	# If it is a wrapped executable running on windows, the openssl
-	# dlls must be copied out of the virtual filesystem to the disk
-	# where Windows will find them when resolving the dependency in
-	# the tls dll. We choose to make them siblings of the executable.
-	package require starkit
-	set dst [file nativename [file dirname $starkit::topdir]]
-	foreach sdll [glob -nocomplain -directory $dir -tails *eay32.dll] {
-	    catch {file delete -force            $dst/$sdll}
-	    catch {file copy   -force $dir/$sdll $dst/$sdll}
-	}
-    }
-    set res [catch {uplevel #0 [list load [file join [pwd] $dll]]} err]
-    catch {cd $cwd}
-    if {$res} {
-	namespace eval [namespace parent] {namespace delete tls}
-	return -code $res $err
-    }
-    rename tls::initlib {}
-}
-
 #
 # Backwards compatibility, also used to set the default
 # context options

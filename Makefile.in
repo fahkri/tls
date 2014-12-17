@@ -265,7 +265,7 @@ pkgIndex.tcl-auto:
 pkgIndex.tcl:
 	(echo 'package ifneeded $(PACKAGE_NAME) $(PACKAGE_VERSION) \
 	    "[list source [file join $$dir tls.tcl]] ; \
-	     [list tls::initlib $$dir $(PKG_LIB_FILE)]"'\
+	     [list load [file join $$dir $(PKG_LIB_FILE)]]"'\
 	) > pkgIndex.tcl
 
 #========================================================================
