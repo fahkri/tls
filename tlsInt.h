@@ -26,8 +26,8 @@
 
 #ifdef __WIN32__
 #define WIN32_LEAN_AND_MEAN
+#define NOCRYPT
 #include <windows.h>
-#include <wincrypt.h> /* OpenSSL needs this on Windows */
 #endif
 
 /* Handle tcl8.3->tcl8.4 CONST changes */
